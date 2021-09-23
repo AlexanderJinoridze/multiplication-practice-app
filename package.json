@@ -14,7 +14,7 @@
         "and",
         "tricks"
     ],
-    "author": "Alexander <jinoridzealexander@gmail.com>",
+    "author": "Alexander Jinoridze <jinoridzealexander@gmail.com>",
     "license": "ISC",
     "dependencies": {
         "config": "^3.3.6",
