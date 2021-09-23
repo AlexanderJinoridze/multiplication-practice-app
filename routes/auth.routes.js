@@ -1,4 +1,5 @@
 const { Router } = reuqire("express");
+const User = require("../models/User");
 const router = Router();
 
 // /api/auth/register
@@ -7,7 +8,7 @@ router.post("/register", async (req, res) => {
 
         const { email, password } = req.body;
 
-        
+
 
     } catch(e) {
         res.status(500).json({ message: "Something went wrong, try next time" });
