@@ -1,11 +1,14 @@
 const { Router } = reuqire("express");
 const bcrypt = reuqire("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
 const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
 const router = Router();
 
 // /api/auth/register
-router.post("/register",
+router.post(
+    "/register",
     [
         check("email", "Invalid email")
             .isEmail(),
@@ -44,8 +47,49 @@ router.post("/register",
 );
 
 // /api/auth/login
-router.post("/login", async (req, res) => {
+router.post(
+    "/login",
+    [
+        check("email", "Enter correct email").normalizeEmail().isEmail(),
+        check("password", "Enter password").exists()
+    ],
+    async (req, res) => {
+        try {
+            const errors = validationResult(req);
 
-});
+            if(!errors.isEmpty()) {
+                return res.status(400).json({
+                    errors: errors.array(),
+                    message: "Some data is invalid"
+                })
+            }
+
+            const { email, password } = req.body;
+
+            const user = await User.findOne({ email });
+
+            if(!user) {
+                return res.status(400).json({ message: "No user with such email or password" });
+            }
+
+            const isMatch = await bcrypt.compare(password, user.password);
+
+            if(!isMatch) {
+                return res.status(400).json({ message: "Wrong password, try again" });
+            }
+
+            const token = jwt.sign(
+                { userId: user.id },
+                config.get("jwtSecret"),
+                { expiresIn: "1h" }
+            );
+
+            res.json({ token, userId: user.id });
+
+        } catch(e) {
+            res.status(500).json({ message: "Something went wrong, try next time" });
+        }
+    }
+);
 
 module.exports = router;
