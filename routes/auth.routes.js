@@ -3,7 +3,15 @@ const router = Router();
 
 // /api/auth/register
 router.post("/register", async (req, res) => {
+    try {
 
+        const { email, password } = req.body;
+
+        
+
+    } catch(e) {
+        res.status(500).json({ message: "Something went wrong, try next time" });
+    }
 });
 
 // /api/auth/login
