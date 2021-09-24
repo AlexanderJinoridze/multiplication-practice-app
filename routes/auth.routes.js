@@ -10,10 +10,12 @@ const router = Router();
 router.post(
     "/register",
     [
+        check("username", "Invalid username")
+            .not().isEmpty(),
         check("email", "Invalid email")
             .isEmail(),
-        check("password", "Password should have at least 6 characters")
-            .isLength({ min: 6 })
+        check("password", "Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number, password must contain only Latin letters and numbers")
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
     ],
     async (req, res) => {
         try {
@@ -22,11 +24,11 @@ router.post(
             if(!errors.isEmpty()) {
                 return res.status(400).json({
                     errors: errors.array(),
-                    message: "Some data is invalid"
+                    message: "Some data of registration form is invalid"
                 })
             }
 
-            const { email, password } = req.body;
+            const { username, email, password } = req.body;
             const candidate = await User.findOne({ email });
 
             if(candidate) {
@@ -34,7 +36,7 @@ router.post(
             }
 
             const hashedPassword = bcrypt.hash(password, 12);
-            const user = new User({ email, password: hashedPassword });
+            const user = new User({ username, email, password: hashedPassword });
 
             await user.save();
 
