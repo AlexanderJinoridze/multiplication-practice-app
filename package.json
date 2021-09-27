@@ -19,6 +19,7 @@
     "author": "Alexander Jinoridze <jinoridzealexander@gmail.com>",
     "license": "ISC",
     "dependencies": {
+        "@craco/craco": "^6.3.0",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
         "config": "^3.3.6",
@@ -28,7 +29,10 @@
         "mongoose": "^6.0.7"
     },
     "devDependencies": {
+        "autoprefixer": "^9.8.7",
         "concurrently": "^6.2.1",
-        "nodemon": "^2.0.12"
+        "nodemon": "^2.0.12",
+        "postcss": "^7.0.38",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16"
     }
 }
