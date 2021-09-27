@@ -1,11 +1,12 @@
 module.exports = {
     purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-    darkMode: false, // or "media" or "class"
+    darkMode: "class", // or "media" or "class"
     theme: {
         extend: {},
         colors: {
             transparent: "transparent",
             current: "currentColor",
+            white: "#fff",
             gray: {
                 DEFAULT: "#707F8F",
                 "50":    "#F9FAFB",
@@ -74,7 +75,10 @@ module.exports = {
         }
     },
     variants: {
-        extend: {},
+        extend: {
+            backgroundColor: ['dark'],
+            textColor: ['dark']
+        },
     },
     plugins: [],
 }
