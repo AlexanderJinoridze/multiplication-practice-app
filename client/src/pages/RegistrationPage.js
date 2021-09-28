@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function RegistrationPage() {
     return(
@@ -30,11 +31,11 @@ export default function RegistrationPage() {
             </div>
             <div className="flex items-center mb-10">
                 <input type="checkbox" name="accept" className="mr-3" />
-                <span>I accept the <a href="zaza">Privacy Policy</a> and <br /> the <a href="soso">Terms of Service</a></span>
+                <span>I accept the <Link to="/privacy-policy" target="_blank">Privacy Policy</Link> and <br /> the <Link to="/terms-of-service" target="_blank">Terms of Service</Link></span>
             </div>
             <div className="flex items-center mb-10">
-                <button className="bg-yellow-500 hover:bg-yellow-300 text-gray-900 block py-3 px-8 mr-6 rounded-xl">Sign up</button>
-                <span>Have an account? <a href="soso">Log in now</a></span>
+                <button className="bg-yellow-500 hover:bg-yellow-300 text-gray-900 block py-3 px-8 mr-5 rounded-xl">Sign up</button>
+                <span>Have an account? <Link to="/account/login">Log in now</Link></span>
             </div>
         </div>
     );
