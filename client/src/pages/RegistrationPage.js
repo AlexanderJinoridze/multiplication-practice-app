@@ -7,25 +7,25 @@ export default function RegistrationPage() {
             <div className="mb-4">
                 <label htmlFor="name">
                     <span>Username</span>
-                    <input type="text" className="border-gray-200 dark:border-gray-600 dark:bg-gray-700 focus:border-yellow dark:focus:border-yellow-700 py-3 px-6 w-96 my-1 shadow-sm block rounded-lg border" />
+                    <input type="text" />
                 </label>
             </div>
             <div className="mb-4">
                 <label htmlFor="name">
                     <span>E-mail</span>
-                    <input type="text" className="border-gray-200 dark:border-gray-600 dark:bg-gray-700 focus:border-yellow dark:focus:border-yellow-700 py-3 px-6 w-96 my-1 shadow-sm block rounded-lg border" />
+                    <input type="text" />
                 </label>
             </div>
             <div className="mb-4">
                 <label htmlFor="name">
                     <span>Password</span>
-                    <input type="password" className="border-gray-200 dark:border-gray-600 dark:bg-gray-700 focus:border-yellow dark:focus:border-yellow-700 py-3 px-6 w-96 my-1 shadow-sm block rounded-lg border" />
+                    <input type="password" />
                 </label>
             </div>
             <div className="mb-4">
                 <label htmlFor="name">
                     <span>Confirm password</span>
-                    <input type="password" className="border-gray-200 dark:border-gray-600 dark:bg-gray-700 focus:border-yellow dark:focus:border-yellow-700 py-3 px-6 w-96 my-1 shadow-sm block rounded-lg border" />
+                    <input type="password" />
                 </label>
             </div>
             <div className="flex items-center mb-10">

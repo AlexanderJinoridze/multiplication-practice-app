@@ -1,9 +1,8 @@
 import React from "react";
 import useRoutes from "./routes";
-import { Link } from "react-router-dom";
 
 export default function App() {
-    const routes = useRoutes(true);
+    const routes = useRoutes(false);
 
     return (
         <div>

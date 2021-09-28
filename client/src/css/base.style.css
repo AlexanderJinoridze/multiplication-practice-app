@@ -1,0 +1,187 @@
+@tailwind base;
+
+@layer base {
+    body,
+    article, section, nav, aside, header, footer, address, main, 
+    p, blockquote, ol, ul, li, figure, figcaption, div, hr,
+    h1, h2, h3, h4, h5, h6,
+    a, em, strong, cite, q, dfn, abbr, time, mark, span, br, wbr, small, i, b, u, s, sub, sup, ins, del,
+    img, iframe,
+    table, tr, td, th, caption, tbody, thead, tfoot, colgroup, col,
+    form, input, textarea, label, button {
+        @apply m-0 p-0 border-0 outline-none leading-snug;
+        box-sizing: border-box;
+        vertical-align: baseline;
+        background: transparent;
+    }
+    
+    html {
+        font-size: 16px;
+        font-family: 'Merriweather Sans', sans-serif;
+    }
+    
+    body {
+        @apply bg-gray-50 text-gray-800 dark:text-gray-100 dark:bg-gray-800;
+    }
+    
+    *:disabled {
+        cursor: not-allowed !important;
+    }
+    
+    address {
+        @apply not-italic;
+    }
+    
+    h1, h2, h3, h4, h5, h6, p, article, ol, ul, iframe, figure, img, blockquote, table, hr {}
+    
+    ol, ul {
+        @apply pl-2;
+    }
+    
+    li, caption {
+        @apply mb-3;
+    }
+    
+    li:last-child {
+        @apply m-0;
+    }
+    
+    figCaption {
+        @apply mt-3;
+    }
+    
+    h1 {
+        @apply text-5xl;
+    }
+    
+    h2 {
+        @apply text-4xl;
+    }
+    
+    h3 {
+        @apply text-3xl;
+    }
+    
+    h4 {
+        @apply text-2xl;
+    }
+    
+    h5 {
+        @apply text-xl;
+    }
+    
+    h6 {
+        @apply text-lg;
+    }
+    
+    p, article, li, input, textarea, blockquote {
+        @apply text-base;
+    }
+    
+    iframe, label, img, input, textarea, button, svg {
+        @apply block max-w-full;
+    }
+    
+    figure {
+        @apply text-center;
+    }
+    
+    figure img {
+        margin: 0 auto;
+    }
+    
+    sup, sub, small {
+        @apply leading-none;
+        font-size: 80%;
+    }
+    
+    sup {
+        vertical-align: super;
+    }
+    
+    sub {
+        vertical-align: sub;
+    }
+    
+    mark {
+        @apply pb-1 bg-yellow-50 rounded-sm italic font-bold;
+    }
+    
+    a {
+        @apply text-yellow-700;
+    }
+
+    a:hover {
+        @apply text-yellow-500;
+    }
+
+    a:active {
+        @apply text-yellow-800;
+    }
+
+    .anchore-no-style a, .anchore-no-style a:hover, .anchore-no-style a:active,
+    a.no-style, a.no-style:hover, a.no-style:active {
+        @apply text-gray-800;
+    }
+
+    abbr[title], dfn[title] {
+        @apply border-b border-dotted;
+        cursor:help;
+    }
+
+    figCaption, caption {
+        @apply text-base italic text-gray-500;
+    }
+
+    table {
+        border-collapse:collapse;
+        border-spacing:0;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    td, th {
+        @apply py-1 px-6 text-left border border-solid border-gray-400;
+    }
+
+    thead, tfoot {
+        @apply bg-gray-200;
+    }
+
+    hr {
+        @apply h-1 border-t border-solid border-gray-400;
+    }
+
+    input:not([type="submit"],[type="reset"],[type="checkbox"],[type="radio"]), textarea {
+        @apply
+            border-gray-200
+            dark:border-gray-600
+            dark:bg-gray-700
+            focus:border-yellow
+            dark:focus:border-yellow-700
+            w-full
+            py-3
+            px-4
+            mt-1
+            shadow-sm
+            rounded-lg
+            border;
+    }
+    
+    input:focus{
+        outline: none;
+        box-shadow: 0 0 0 .2rem rgba(255,191,0, .33);
+    }
+    
+    input:not([type="submit"],[type="reset"]):disabled, textarea:disabled {
+        @apply bg-gray-100;
+    }
+    
+    textarea {
+        @apply resize-none;
+    }
+    
+    .text-block img {
+        @apply rounded-xl mx-auto;
+    }
+}
