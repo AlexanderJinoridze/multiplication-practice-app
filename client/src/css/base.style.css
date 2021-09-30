@@ -148,6 +148,10 @@
         @apply h-1 border-t border-solid border-gray-400;
     }
 
+    button, [type='button'], [type='reset'], [type='submit'] {
+        @apply inline-block;
+    }
+
     input:not([type="submit"],[type="reset"],[type="checkbox"],[type="radio"]), textarea {
         @apply
             bg-white
@@ -164,8 +168,8 @@
             rounded-lg
             border;
     }
-    
-    input:focus{
+
+    input:not([type="submit"]):focus {
         outline: none;
         box-shadow: 0 0 0 .2rem rgba(255,191,0, .33);
     }

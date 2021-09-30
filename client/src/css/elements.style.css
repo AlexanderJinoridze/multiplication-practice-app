@@ -1,0 +1,28 @@
+/* display-font */
+
+.display-font {
+    font-family: 'Fredoka One', cursive;
+}
+
+/* btn */
+
+.btn {
+    @apply
+        inline-block
+        text-center
+        rounded-xl
+        py-3
+        px-8
+        bg-gray-100
+        dark:bg-gray-900
+        text-gray-800
+        dark:text-gray-100;
+}
+
+.btn.btn-primary {
+    @apply
+        bg-yellow
+        text-gray-900
+        hover:bg-yellow-300
+        hover:no-underline;
+}
