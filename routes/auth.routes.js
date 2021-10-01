@@ -11,15 +11,33 @@ router.post(
     "/register",
     [
         check("username", "Invalid username")
+            .trim()
             .not().isEmpty(),
-        check("email", "Invalid email")
+        check("email", "Invalid email syntax")
+            .trim()
             .isEmail(),
         check("password", "Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number, password must contain only Latin letters and numbers")
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+            .trim()
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
+        check("confirmPassword")
+            .trim()
+            .custom(async (confirmPassword, {req}) => {
+                const password = req.body.password;
+
+                if(password !== confirmPassword){
+                    throw new Error("Passwords must be same")
+                }
+            }),
+        check("terms")
+            .custom(async (terms) => {
+                if(!(terms && terms.length)){
+                    throw new Error("You have to accept terms of service and privacy policy to sign up")
+                }
+            })
     ],
     async (req, res) => {
         try {
-            const errors = validationResult(req);
+            const errors = await validationResult(req);
 
             if(!errors.isEmpty()) {
                 return res.status(400).json({
