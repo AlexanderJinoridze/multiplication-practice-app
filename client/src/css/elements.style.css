@@ -1,7 +1,9 @@
-/* display-font */
-
 .display-font {
     font-family: 'Fredoka One', cursive;
+}
+
+.text-pale {
+    @apply text-gray-700 dark:text-gray-300;
 }
 
 /* btn */
@@ -9,20 +11,44 @@
 .btn {
     @apply
         inline-block
+        hover:no-underline
         text-center
         rounded-xl
         py-3
         px-8
         bg-gray-100
-        dark:bg-gray-900
+        hover:bg-gray-200
+        dark:bg-gray-800
+        dark:hover:bg-gray-700
         text-gray-800
         dark:text-gray-100;
 }
 
+.btn.btn-big {
+    @apply text-2xl font-bold py-4 px-16 rounded-full;
+}
+
 .btn.btn-primary {
     @apply
-        bg-yellow
-        text-gray-900
-        hover:bg-yellow-300
-        hover:no-underline;
+        text-white
+        bg-blue
+        dark:bg-yellow
+        dark:text-gray-900
+        hover:bg-blue-600
+        dark:hover:bg-yellow-600
+}
+
+.btn.btn-success {
+    @apply
+        text-white
+        bg-green-200
+        hover:bg-green-100
+}
+
+.btn.btn-danger {
+    @apply
+        text-white
+        bg-red
+        hover:bg-red-200
+        dark:hover:bg-red-400
 }

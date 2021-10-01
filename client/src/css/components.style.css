@@ -3,8 +3,7 @@ nav {
         flex
         justify-between
         items-center
-        py-6
-        px-8;
+        p-6;
 }
 
 #page {
