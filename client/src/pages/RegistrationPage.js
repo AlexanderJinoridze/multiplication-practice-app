@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PasswordInput from "../components/PasswordInput";
 
 export default function RegistrationPage() {
     return(
@@ -21,13 +22,13 @@ export default function RegistrationPage() {
                 <div className="mb-4">
                     <label htmlFor="password">
                         <span>Password</span>
-                        <input type="password" name="password" id="password" />
+                        <PasswordInput name="password" id="password" />
                     </label>
                 </div>
                 <div className="mb-4">
                     <label htmlFor="confirmPassword">
                         <span>Confirm password</span>
-                        <input type="password" name="confirmPassword" id="confirmPassword" />
+                        <PasswordInput name="confirmPassword" id="confirmPassword" />
                     </label>
                 </div>
                 <div className="flex items-center mb-10">
