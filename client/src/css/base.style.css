@@ -9,7 +9,7 @@
     img, iframe,
     table, tr, td, th, caption, tbody, thead, tfoot, colgroup, col,
     form, input, textarea, label, button {
-        @apply m-0 p-0 border-0 outline-none leading-snug;
+        @apply m-0 p-0 border-0 outline-none leading-6;
         box-sizing: border-box;
         vertical-align: baseline;
         background: transparent;
@@ -19,7 +19,7 @@
         @apply block;
         line-height: 0;
     }
-    
+
     html {
         font-size: 16px;
         font-family: 'Merriweather Sans', sans-serif;
@@ -32,19 +32,13 @@
     *:disabled {
         cursor: not-allowed !important;
     }
-    
-    address {
-        @apply not-italic;
-    }
-    
-    h1, h2, h3, h4, h5, h6, p, article, ol, ul, iframe, figure, img, blockquote, table, hr {}
-    
+
     ol, ul {
         @apply pl-2;
     }
     
     li, caption {
-        @apply mb-3;
+        @apply mb-1 list-disc leading-5;
     }
     
     li:last-child {
@@ -79,7 +73,7 @@
         @apply text-lg;
     }
     
-    p, article, li, input, textarea, blockquote {
+    p, article, input, textarea, blockquote {
         @apply text-base;
     }
     
@@ -107,7 +101,7 @@
     sub {
         vertical-align: sub;
     }
-    
+
     mark {
         @apply pb-1 bg-yellow-50 rounded-sm italic font-bold;
     }
@@ -118,11 +112,6 @@
 
     a:hover {
         @apply underline;
-    }
-
-    .anchore-no-style a, .anchore-no-style a:hover, .anchore-no-style a:active,
-    a.no-style, a.no-style:hover, a.no-style:active {
-        @apply text-gray-800;
     }
 
     abbr[title], dfn[title] {
@@ -151,43 +140,5 @@
 
     hr {
         @apply h-1 border-t border-solid border-gray-400;
-    }
-
-    button, [type='button'], [type='reset'], [type='submit'] {
-        @apply inline-block;
-    }
-
-    input:not([type="submit"],[type="reset"],[type="checkbox"],[type="radio"]), textarea {
-        @apply
-            bg-white
-            border-gray-200
-            dark:border-gray-700
-            dark:bg-gray-800
-            focus:border-yellow
-            dark:focus:border-yellow-700
-            w-full
-            py-3
-            px-4
-            mt-1
-            shadow-sm
-            rounded-lg
-            border;
-    }
-
-    input:not([type="submit"]):focus {
-        outline: none;
-        box-shadow: 0 0 0 .2rem rgba(255,191,0, .33);
-    }
-    
-    input:not([type="submit"],[type="reset"]):disabled, textarea:disabled {
-        @apply bg-gray-100;
-    }
-    
-    textarea {
-        @apply resize-none;
-    }
-    
-    .text-block img {
-        @apply rounded-xl mx-auto;
     }
 }

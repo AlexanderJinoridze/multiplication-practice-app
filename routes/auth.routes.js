@@ -12,12 +12,15 @@ router.post(
     [
         check("username", "Invalid username")
             .trim()
-            .not().isEmpty(),
+            .isLength({ min: 1, max: 256 })
+            .not().matches(/^$|\s+/),
         check("email", "Invalid email syntax")
             .trim()
-            .isEmail(),
+            .isLength({ min: 1, max: 320 })
+            .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
         check("password", "Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number, password must contain only Latin letters and numbers")
             .trim()
+            .isLength({ min: 8, max: 128 })
             .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
         check("confirmPassword")
             .trim()
@@ -30,7 +33,7 @@ router.post(
             }),
         check("terms")
             .custom(async (terms) => {
-                if(!(terms && terms.length)){
+                if(!terms){
                     throw new Error("You have to accept terms of service and privacy policy to sign up")
                 }
             })

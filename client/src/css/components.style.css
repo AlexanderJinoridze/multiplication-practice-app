@@ -13,3 +13,49 @@ nav {
 #page main {
     @apply flex-1 py-12;
 }
+
+
+
+
+
+.submit-container {
+    position: relative;
+}
+
+.submit-container .loader {
+    @apply
+        hidden
+        absolute
+        ease-linear
+        rounded-full
+        border-4
+        border-solid
+        border-transparent
+        top-1/2
+        bottom-1/2
+        left-1/2
+        right-1/2
+        h-6
+        w-6;
+    animation: spinner 1.5s linear infinite;
+    border-top-color: #fff;
+    border-left-color: #fff;
+}
+
+.dark .submit-container .loader {
+    border-top-color: #16191D;
+    border-left-color: #16191D;
+}
+
+.submit-container.loading .loader {
+    display: block;
+}
+
+.submit-container.loading .btn {
+    color:rgba(0, 0, 0, 0)
+}
+
+@keyframes spinner {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

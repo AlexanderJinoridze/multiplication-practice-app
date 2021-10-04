@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("../fonts/_Icons/icons.eot?883c89b0111727ec81029e0219f5b048#iefix") format("embedded-opentype"),
-url("../fonts/_Icons/icons.svg?883c89b0111727ec81029e0219f5b048#icons") format("svg"),
-url("../fonts/_Icons/icons.ttf?883c89b0111727ec81029e0219f5b048") format("truetype"),
-url("../fonts/_Icons/icons.woff2?883c89b0111727ec81029e0219f5b048") format("woff2"),
-url("../fonts/_Icons/icons.woff?883c89b0111727ec81029e0219f5b048") format("woff");
+    src: url("../fonts/_Icons/icons.eot?66cbf198c190fd9547185973aa99a543#iefix") format("embedded-opentype"),
+url("../fonts/_Icons/icons.svg?66cbf198c190fd9547185973aa99a543#icons") format("svg"),
+url("../fonts/_Icons/icons.ttf?66cbf198c190fd9547185973aa99a543") format("truetype"),
+url("../fonts/_Icons/icons.woff2?66cbf198c190fd9547185973aa99a543") format("woff2"),
+url("../fonts/_Icons/icons.woff?66cbf198c190fd9547185973aa99a543") format("woff");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -18,9 +18,12 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-eye-slash:before {
+.icon-check:before {
     content: "\f101";
 }
-.icon-eye:before {
+.icon-eye-slash:before {
     content: "\f102";
+}
+.icon-eye:before {
+    content: "\f103";
 }

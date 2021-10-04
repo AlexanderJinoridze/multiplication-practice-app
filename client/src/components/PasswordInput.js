@@ -14,8 +14,8 @@ export default function Navbar(props) {
 
     return(
         <div className="relative">
-            <button className="btn btn-input" onClick={ toggleShowPassword }>{ passwordType === "password"? <i className="icon-eye"></i> : <i className="icon-eye-slash"></i> }</button>
-            <input type={ passwordType } { ...props } />
+            <div className="btn btn-input" onClick={ toggleShowPassword }>{ passwordType === "password"? <i className="icon-eye"></i> : <i className="icon-eye-slash"></i> }</div>
+            <input type={ passwordType }  autoComplete="on" { ...props } />
         </div>
     );
 }
