@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
 import useHttp from "../hooks/http.hook";
+import toast from 'react-hot-toast';
 
 export default function RegistrationPage() {
     const validationTests = {
@@ -12,7 +13,7 @@ export default function RegistrationPage() {
         terms: (value)=>!!value
     };
 
-    const { loading, error, request, clearError } = useHttp();
+    const { loading, request } = useHttp();
 
     const [startValidation, setStartValidation] = useState(false);
     const [showPasswordGuide, setShowPasswordGuide] = useState(false);
@@ -26,13 +27,13 @@ export default function RegistrationPage() {
     const [errors, setErrors] = useState({
         username: { msg: "Invalid username", isInvalid: false },
         email: { msg: "Invalid email syntax", isInvalid: false },
-        password: { msg: "Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number, password must contain only Latin letters and numbers", isInvalid: false },
+        password: { msg: "", isInvalid: false },
         confirmPassword: { msg: "Passwords must be same", isInvalid: false },
         terms: { msg: "You have to accept terms of service and privacy policy to sign up", isInvalid: false }
     });
 
-    const registerHandler = async (e) => {
-        e.preventDefault();
+    const registerHandler = async (event) => {
+        event.preventDefault();
         try{
             const data = await request("/api/auth/register", "POST", { ...body });
             setBody({
@@ -42,17 +43,20 @@ export default function RegistrationPage() {
                 confirmPassword: "",
                 terms: false
             });
+            console.log(data);
         } catch (e) {
             setStartValidation(true);
-            setShowPasswordGuide(false)
+            setShowPasswordGuide(false);
             setErrors((prev)=>{
-                let res = { ...prev };
+                let newErrorState = { ...prev };
                 e.errors.forEach(element => {
-                    res[element.param].msg = element.msg;
-                    res[element.param].isInvalid = true;
+                    const currentField = newErrorState[element.param];
+                    currentField.msg = element.msg;
+                    currentField.isInvalid = true;
                 });
-                return res;
+                return newErrorState;
             });
+            toast.error(e.message);
         }
     }
 
@@ -63,17 +67,18 @@ export default function RegistrationPage() {
     }
 
     useEffect(()=>{
-        if(!startValidation) {
-            setShowPasswordGuide(!!body.password.length)
+        if(startValidation) {
+            Object.keys(errors).forEach(key => {
+                if(startValidation) {
+                    setErrors((prev)=>{
+                        return { ...prev, [key]: { ...prev[key], isInvalid: !validationTests[key](body[key]) } }
+                    });
+                }
+            });
+        } else {
+            setShowPasswordGuide(!!body.password.length);
         }
-        Object.keys(errors).forEach(key => {
-            if(startValidation) {
-                setErrors((prev)=>{
-                    return { ...prev, [key]: { ...prev[key], isInvalid: !validationTests[key](body[key]) } }
-                });
-            }
-        });
-    },[body])
+    },[body]);
 
     return(
         <div id="page">
@@ -88,7 +93,7 @@ export default function RegistrationPage() {
                                     type="text"
                                     name="username"
                                     id="username"
-                                    maxlength="256"
+                                    maxLength="256"
                                     value={ body.username }
                                     className={ errors.username.isInvalid? "error" : "" }
                                     onChange={ handleChange }
@@ -103,7 +108,7 @@ export default function RegistrationPage() {
                                     type="text"
                                     name="email"
                                     id="email"
-                                    maxlength="320"
+                                    maxLength="320"
                                     value={ body.email }
                                     className={ errors.email.isInvalid? "error" : "" }
                                     onChange={ handleChange }
@@ -117,12 +122,12 @@ export default function RegistrationPage() {
                                 <PasswordInput
                                     name="password"
                                     id="password"
-                                    maxlength="128"
+                                    maxLength="128"
                                     value={ body.password }
                                     className={ errors.password.isInvalid? "error" : "" }
                                     onChange={ handleChange }
                                 />
-                                {showPasswordGuide || errors.password.isInvalid && <div className={showPasswordGuide && "text-white bg-blue-600 rounded-lg px-5 py-3 inline-block mt-2" || errors.password.isInvalid && "error-message"}>
+                                {(showPasswordGuide || errors.password.isInvalid) && <div className={(showPasswordGuide && "password-hint-message") || (errors.password.isInvalid && "error-message")}>
                                     <span>Password should have:</span>
                                     <ul className="p-0 mt-1 ml-6">
                                         <li>Minimum 8 characters</li>
@@ -138,7 +143,7 @@ export default function RegistrationPage() {
                                 <PasswordInput
                                     name="confirmPassword"
                                     id="confirmPassword"
-                                    maxlength="128"
+                                    maxLength="128"
                                     value={ body.confirmPassword }
                                     className={ errors.confirmPassword.isInvalid? "error":"" }
                                     onChange={ handleChange }
@@ -157,7 +162,7 @@ export default function RegistrationPage() {
                                         return { ...prev, terms: !body.terms }
                                     }) }
                                 />
-                                <label for="terms" className="mr-3"></label>
+                                <label htmlFor="terms" className="mr-3"></label>
                                 <span>I accept the <Link to="/privacy-policy" target="_blank">Privacy Policy</Link> and <br /> the <Link to="/terms-of-service" target="_blank">Terms of Service</Link></span>
                             </div>
                             { errors.terms.isInvalid && <span className="error-message">{ errors.terms.msg }</span> }

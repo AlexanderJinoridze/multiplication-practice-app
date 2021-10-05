@@ -15,6 +15,16 @@
         mt-2;
 }
 
+.password-hint-message {
+    @apply
+        text-white
+        bg-blue-600
+        rounded-lg
+        px-5
+        py-3
+        inline-block
+        mt-2;
+}
 
 
 /* btn */

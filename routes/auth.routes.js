@@ -18,7 +18,7 @@ router.post(
             .trim()
             .isLength({ min: 1, max: 320 })
             .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
-        check("password", "Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number, password must contain only Latin letters and numbers")
+        check("password", "")
             .trim()
             .isLength({ min: 8, max: 128 })
             .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
@@ -45,7 +45,7 @@ router.post(
             if(!errors.isEmpty()) {
                 return res.status(400).json({
                     errors: errors.array(),
-                    message: "Some data of registration form is invalid"
+                    message: "Some fields are invalid"
                 })
             }
 
