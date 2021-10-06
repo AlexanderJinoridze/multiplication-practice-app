@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
 import useHttp from "../hooks/http.hook";
 import toast from 'react-hot-toast';
@@ -14,6 +14,7 @@ export default function RegistrationPage() {
     };
 
     const { loading, request } = useHttp();
+    const history = useHistory();
 
     const [startValidation, setStartValidation] = useState(false);
     const [showPasswordGuide, setShowPasswordGuide] = useState(false);
@@ -43,19 +44,25 @@ export default function RegistrationPage() {
                 confirmPassword: "",
                 terms: false
             });
-            console.log(data);
+            toast.success(data.message);
+            history.push("/");
         } catch (e) {
-            setStartValidation(true);
-            setShowPasswordGuide(false);
-            setErrors((prev)=>{
-                let newErrorState = { ...prev };
-                e.errors.forEach(element => {
-                    const currentField = newErrorState[element.param];
-                    currentField.msg = element.msg;
-                    currentField.isInvalid = true;
+            if(e.errors) {
+                setStartValidation(true);
+                setShowPasswordGuide(false);
+                setErrors((prev)=>{
+                    let newErrorState = { ...prev };
+                    e.errors.forEach(element => {
+                        const currentField = newErrorState[element.param];
+                        currentField.msg = element.msg;
+                        currentField.isInvalid = true;
+                    });
+                    return newErrorState;
                 });
-                return newErrorState;
-            });
+            } else {
+                setStartValidation(false);
+                setShowPasswordGuide(true);
+            }
             toast.error(e.message);
         }
     }
@@ -151,7 +158,7 @@ export default function RegistrationPage() {
                                 { errors.confirmPassword.isInvalid && <span className="error-message">{ errors.confirmPassword.msg }</span> }
                             </label>
                         </div>
-                        <div className="mb-10">
+                        <div className="mb-6">
                             <div className="flex items-center">
                                 <input
                                     type="checkbox"
@@ -167,8 +174,8 @@ export default function RegistrationPage() {
                             </div>
                             { errors.terms.isInvalid && <span className="error-message">{ errors.terms.msg }</span> }
                         </div>
-                        <div className="flex items-center">
-                            <div className={`submit-container mr-6 ${ loading? "loading" : ""}`}>
+                        <div className="flex items-center mt-10">
+                            <div className={`submit-container mr-4 ${ loading? "loading" : ""}`}>
                                 <input
                                     type="submit"
                                     name="submit"

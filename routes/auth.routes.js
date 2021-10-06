@@ -53,7 +53,7 @@ router.post(
             const candidate = await User.findOne({ email });
 
             if(candidate) {
-                return res.status(400).json({ message: "User with this Email already exists" });
+                return res.status(400).json({ message: "User with this email already exists" });
             }
 
             const hashedPassword = await bcrypt.hash(password, 12);
@@ -73,8 +73,14 @@ router.post(
 router.post(
     "/login",
     [
-        check("email", "Enter correct email").normalizeEmail().isEmail(),
-        check("password", "Enter password").exists()
+        check("email", "Invalid email syntax")
+            .trim()
+            .isLength({ min: 1, max: 320 })
+            .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
+        check("password", "Enter password")
+            .trim()
+            .isLength({ min: 1, max: 128 })
+            .not().matches(/^$|\s+/)
     ],
     async (req, res) => {
         try {
