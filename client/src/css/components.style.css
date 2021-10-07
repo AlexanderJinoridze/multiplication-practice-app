@@ -18,11 +18,12 @@ nav {
 
 
 
-.submit-container {
+.loading, .loading * {
     position: relative;
+    color:rgba(0, 0, 0, 0) !important;
 }
 
-.submit-container .loader {
+.loading .loader {
     @apply
         hidden
         absolute
@@ -42,17 +43,13 @@ nav {
     border-left-color: #fff;
 }
 
-.dark .submit-container .loader {
+.loading .btn-primary + .loader, .loading.btn-primary .loader {
     border-top-color: #16191D;
     border-left-color: #16191D;
 }
 
-.submit-container.loading .loader {
+.loading .loader {
     display: block;
-}
-
-.submit-container.loading .btn {
-    color:rgba(0, 0, 0, 0)
 }
 
 @keyframes spinner {
