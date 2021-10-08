@@ -41,6 +41,14 @@
         px-8;
 }
 
+.btn.btn-square {
+    @apply p-3;
+}
+
+.btn.btn-square i[class^="icon-"] {
+    font-size: 1.5rem;
+}
+
 .btn.btn-input {
     @apply
         text-pale

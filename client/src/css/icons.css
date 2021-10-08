@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("../fonts/_Icons/icons.eot?ecb24f4bc7116b292eba8ec1e589e9f0#iefix") format("embedded-opentype"),
-url("../fonts/_Icons/icons.svg?ecb24f4bc7116b292eba8ec1e589e9f0#icons") format("svg"),
-url("../fonts/_Icons/icons.ttf?ecb24f4bc7116b292eba8ec1e589e9f0") format("truetype"),
-url("../fonts/_Icons/icons.woff2?ecb24f4bc7116b292eba8ec1e589e9f0") format("woff2"),
-url("../fonts/_Icons/icons.woff?ecb24f4bc7116b292eba8ec1e589e9f0") format("woff");
+    src: url("../fonts/_Icons/icons.eot?88f19885abd0166a2bfa4fd377f4909a#iefix") format("embedded-opentype"),
+url("../fonts/_Icons/icons.svg?88f19885abd0166a2bfa4fd377f4909a#icons") format("svg"),
+url("../fonts/_Icons/icons.ttf?88f19885abd0166a2bfa4fd377f4909a") format("truetype"),
+url("../fonts/_Icons/icons.woff2?88f19885abd0166a2bfa4fd377f4909a") format("woff2"),
+url("../fonts/_Icons/icons.woff?88f19885abd0166a2bfa4fd377f4909a") format("woff");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -21,12 +21,18 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-check:before {
     content: "\f101";
 }
-.icon-eye-slash:before {
+.icon-day:before {
     content: "\f102";
 }
-.icon-eye:before {
+.icon-eye-slash:before {
     content: "\f103";
 }
-.icon-trash:before {
+.icon-eye:before {
     content: "\f104";
+}
+.icon-night:before {
+    content: "\f105";
+}
+.icon-trash:before {
+    content: "\f106";
 }

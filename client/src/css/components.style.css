@@ -56,3 +56,42 @@ nav {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
+
+
+
+
+
+
+
+
+
+
+
+.page-title {
+    @apply mb-8;
+}
+
+
+.text-block h1, .text-block h2, .text-block h3, .text-block h4, .text-block h5, .text-block h6 {
+    @apply mb-3;
+}
+
+.text-block p {
+    @apply mb-6 mt-3 text-gray-700 dark:text-gray-300;
+}
+
+.text-block ul, .text-block ol {
+    @apply my-4 pl-8;
+}
+
+.text-block li {
+    @apply mb-3;
+}
+
+
+
+#logo a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+}
