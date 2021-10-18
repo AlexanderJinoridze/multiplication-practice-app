@@ -45,19 +45,19 @@ export default function DashboardPage() {
         <>
         {!loading
         &&
-        <div id="page">
+        <div className="page">
             <Navbar />
             <main className="container flex flex-col justify-center items-center text-center max-w-4xl">
                 <h2 className="mb-2">Welcome <b>{ userData.username }</b></h2>
                 <h5>Your email is <i>{ userData.email }</i></h5>
                 <div className="flex mt-8 justify-center">
-                    <Link className="btn btn-primary mx-2" to="/practice">Practice</Link>
-                    <Link className="btn btn-primary mx-2" to="/tips">Tips & Tricks</Link>
-                    <Link className="btn btn-primary mx-2" to="/statistics">Statistics</Link>
+                    <Link className="btn-small btn-theme-primary mx-2" to="/practice">Practice</Link>
+                    <Link className="btn-small btn-theme-primary mx-2" to="/tips">Tips & Tricks</Link>
+                    <Link className="btn-small btn-theme-primary mx-2" to="/statistics">Statistics</Link>
                 </div>
                 <div className="flex flex-col items-center mt-32">
                     <span>Want to permanemtly delete your account and progress?</span>
-                    <button onClick={ deleteUser } className="btn btn-danger mt-4 flex flex-row items-center"><i className="icon-trash mr-2"></i>Delete account<div className="loader"></div></button>
+                    <button onClick={ deleteUser } className="btn-small btn-theme-danger mt-4 flex flex-row items-center"><i className="icon-trash mr-2"></i><span>Delete account</span></button>
                 </div>
             </main>
             <Footer />

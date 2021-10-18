@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import toast from 'react-hot-toast';
 import PasswordInput from "../components/PasswordInput";
 import useHttp from "../hooks/http.hook";
-import toast from 'react-hot-toast';
 
 export default function RegistrationPage() {
     const validationTests = {
@@ -88,7 +88,7 @@ export default function RegistrationPage() {
     },[body]);
 
     return(
-        <div id="page">
+        <div className="page">
             <main>
                 <div className="w-96 mx-auto">
                     <h3 className="mb-10 text-center">Create your account</h3>
@@ -169,7 +169,7 @@ export default function RegistrationPage() {
                                         return { ...prev, terms: !body.terms }
                                     }) }
                                 />
-                                <label htmlFor="terms" className="mr-3"></label>
+                                <label htmlFor="terms" className="checkbox mr-3"></label>
                                 <span>I accept the <Link to="/privacy-policy" target="_blank">Privacy Policy</Link> and <br /> the <Link to="/terms-of-service" target="_blank">Terms of Service</Link></span>
                             </div>
                             { errors.terms.isInvalid && <span className="error-message">{ errors.terms.msg }</span> }
@@ -181,7 +181,7 @@ export default function RegistrationPage() {
                                     name="submit"
                                     disabled={ loading }
                                     value="Sign up"
-                                    className="btn btn-primary"
+                                    className="btn-small btn-theme-primary"
                                 />
                                 <div className="loader"></div>
                             </div>

@@ -15,14 +15,22 @@
         background: transparent;
     }
 
+    nav {
+        @apply
+            flex
+            justify-between
+            items-center
+            p-6;
+    }
+
     i[class^="icon-"] {
         @apply block;
-        line-height: 0;
+        line-height: 0 !important;
     }
 
     html {
+        @apply font-sans;
         font-size: 16px;
-        font-family: 'Merriweather Sans', sans-serif;
     }
     
     body {
@@ -107,7 +115,7 @@
     }
     
     a {
-        @apply text-blue dark:text-yellow-600;
+        @apply cursor-pointer text-blue dark:text-yellow-600;
     }
 
     a:hover {
@@ -140,5 +148,65 @@
 
     hr {
         @apply h-1 border-t border-solid border-gray-400;
+    }
+
+    label {
+        @apply cursor-pointer;
+    }
+
+    button, [type='button'], [type='reset'], [type='submit'] {
+        @apply inline-block;
+    }
+    
+    input:not([type="submit"],[type="reset"],[type="checkbox"],[type="radio"]), textarea {
+        @apply
+            bg-white
+            border-gray-200
+            dark:border-gray-700
+            dark:bg-gray-800
+            focus:border-blue
+            dark:focus:border-yellow-700
+            w-full
+            py-3
+            px-4
+            mt-1
+            shadow-sm
+            rounded-lg
+            border;
+    }
+    
+    input:not([type='button'],[type="submit"],[type="reset"],[type="checkbox"],[type="radio"]).error, textarea.error {
+        @apply border-red-300 dark:border-red-300;
+    }
+    
+    input:not([type='button'],[type="submit"],[type="reset"]):focus {
+        outline: none;
+        box-shadow: 0 0 0 .2rem rgba(0,111,238, .33);
+    }
+    
+    .dark input:not([type='button'],[type="submit"],[type="reset"]):focus {
+        outline: none;
+        box-shadow: 0 0 0 .2rem rgba(255,191,0, .33);
+    }
+    
+    input:not([type='button'],[type="submit"],[type="reset"]).error:focus {
+        outline: none;
+        box-shadow: 0 0 0 .2rem rgba(224,15,15, .5);
+    }
+    
+    input:not([type="submit"],[type="reset"]):disabled, textarea:disabled {
+        @apply bg-gray-100;
+    }
+    
+    textarea {
+        @apply resize-none;
+    }
+
+    input[type="checkbox"] {
+        padding: 0;
+        height: initial;
+        width: initial;
+        margin: 0;
+        display: none;
     }
 }

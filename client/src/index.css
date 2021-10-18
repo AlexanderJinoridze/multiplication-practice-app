@@ -1,10 +1,451 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-
 @import "./css/icons.css";
-@import "./css/base.style.css";
-@import "./css/elements.style.css";
-@import "./css/components.style.css";
 
-@tailwind components;
 @tailwind utilities;
+@tailwind components;
+
+@import "./css/base.style.css";
+
+
+
+
+.logo {
+    @apply block hover:no-underline;
+    color: inherit !important;
+}
+
+.text-pale {
+    @apply
+        text-gray-700
+        dark:text-gray-300;
+}
+
+.error-message {
+    @apply
+        text-red
+        inline-block
+        mt-2;
+}
+
+.password-hint-message {
+    @apply
+        text-white
+        bg-blue-600
+        rounded-lg
+        px-5
+        py-3
+        inline-block
+        mt-2;
+}
+
+
+/* btn */
+
+.btn {
+    @apply
+        cursor-pointer
+        hover:no-underline
+        text-center;
+}
+
+.btn-small {
+    @apply
+        btn
+        font-normal
+        py-3
+        px-8
+        rounded-xl;
+}
+
+.btn-big {
+    @apply
+        btn
+        text-2xl
+        font-bold
+        py-4
+        px-16
+        rounded-full;
+}
+
+.btn-square {
+    @apply
+        btn
+        p-3
+        text-2xl
+        rounded-xl;
+}
+
+.btn-input {
+    @apply
+        btn
+        text-pale
+        text-2xl
+        absolute
+        leading-6
+        py-3
+        px-4;
+    top: 1px;
+    right: 1px;
+}
+
+.btn-input + input:not([type="submit"],[type="reset"],[type="checkbox"],[type="radio"]) {
+    @apply pr-14;
+}
+
+.btn-theme-primary {
+    @apply
+        text-white
+        bg-blue
+        dark:bg-yellow
+        dark:text-gray-900
+}
+
+.btn-theme-primary:not(:disabled):hover {
+    @apply
+        bg-blue-600
+        dark:bg-yellow-600;
+}
+
+.btn-theme-link {
+    @apply
+        bg-gray-100
+        dark:bg-gray-800
+        text-gray-800
+        dark:text-gray-100;
+}
+
+.btn-theme-link:not(:disabled):hover {
+    @apply
+        bg-gray-200
+        dark:bg-gray-700;
+}
+
+.btn-theme-success {
+    @apply
+        text-white
+        bg-green-200
+}
+
+.btn-theme-success:not(:disabled):hover {
+    @apply
+        bg-green-100;
+}
+
+.btn-theme-danger {
+    @apply
+        text-white
+        bg-red;
+}
+
+.btn-theme-danger:not(:disabled):hover {
+    @apply
+        bg-red-200
+        dark:bg-red-400;
+}
+
+
+
+/* checkbox */
+
+.checkbox, .chart-checkbox {
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox:before {
+    content: "";
+    @apply
+        relative
+        block
+        border-2
+        shadow-sm
+        border-gray-300
+        dark:border-gray-700
+        bg-white
+        dark:bg-gray-800;
+    border-radius: 4px;
+    width: 18px;
+    height: 18px;
+}
+
+.mini-panel-checkbox:not(:last-of-type) {
+    margin-bottom: 1rem;
+}
+
+.chart-checkbox {
+    @apply
+        flex
+        rounded-sm
+        items-center
+        justify-center
+        bg-gray-100
+        dark:bg-gray-800
+        hover:bg-gray-200
+        dark:hover:bg-gray-700;
+    width: 100%;
+    height: 100%;
+}
+
+.chart-checkbox.mini-chart-checkbox {
+    @apply mx-auto;
+    width: 3rem;
+    height: 3rem;
+}
+
+input[type="checkbox"]:checked + .checkbox:before,
+input[type="checkbox"]:checked + .chart-checkbox {
+    @apply
+        text-white
+        dark:text-gray-900
+        bg-blue
+        border-blue
+        dark:bg-yellow
+        dark:border-yellow;
+}
+
+input[type="checkbox"]:checked + .checkbox:after {
+    @apply
+        block
+        absolute
+        text-white
+        dark:text-gray-900;
+    content: "\f101";
+    font-size: 14px;
+    font-family: icons;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 18px;
+}
+
+
+
+
+/* page */
+
+.page {
+    @apply flex flex-col min-h-screen;
+}
+
+.page > main {
+    @apply flex-1 py-12;
+}
+
+
+
+
+/* loading */
+
+.loading {
+    position: relative;
+}
+
+.loading * {
+    color:rgba(0, 0, 0, 0) !important;
+}
+
+.loader {
+    @apply
+        cursor-not-allowed
+        hidden
+        absolute
+        ease-linear
+        rounded-full
+        border-4
+        border-solid
+        border-transparent
+        top-1/2
+        bottom-1/2
+        left-1/2
+        right-1/2
+        h-6
+        w-6;
+    animation: spinner 1.5s linear infinite;
+    border-top-color: #fff;
+    border-left-color: #fff;
+}
+
+.dark .loading .btn-theme-primary + .loader, .dark .loading.btn-theme-primary .loader {
+    border-top-color: #16191D;
+    border-left-color: #16191D;
+}
+
+.loading .loader {
+    display: block;
+}
+
+@keyframes spinner {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+
+
+/* text block */
+
+.page-title {
+    @apply mb-8;
+}
+
+.text-block h1, .text-block h2, .text-block h3, .text-block h4, .text-block h5, .text-block h6 {
+    @apply mb-3;
+}
+
+.text-block p {
+    @apply mb-6 mt-3 text-gray-700 dark:text-gray-300;
+}
+
+.text-block ul, .text-block ol {
+    @apply my-4 pl-8;
+}
+
+.text-block li {
+    @apply mb-3;
+}
+
+
+
+
+/* chart */
+
+.chart {
+    width: 720px;
+    margin: 0 auto;
+}
+
+.chart-outer-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+}
+
+.chart-inner-container {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.chart-inner-container > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100%/21);
+    height: calc(100%/21);
+    padding: 1px;
+}
+
+.multiplication-table-cell > div {
+    @apply rounded-sm flex items-center justify-center;
+    color: rgba(22,25,29,.25);
+    width: 100%;
+    height: 100%;
+}
+
+.dark .multiplication-table-cell > div {
+    color: rgba(255,255,255,.25);
+}
+
+.multiplication-table-cell.selected > div {
+    @apply dark:text-gray-50 text-gray-900;
+}
+
+.multiplication-table-cell.equal > div {
+    background: rgba(0, 111, 238,.4);
+}
+
+.multiplication-table-cell.selected.equal > div {
+    background: rgba(0, 111, 238,.5);
+}
+
+.dark .multiplication-table-cell.equal > div {
+    background: rgba(255,191,0,.4);
+}
+
+.dark .multiplication-table-cell.selected.equal > div {
+    background: rgba(255,191,0,.5);
+}
+
+.chart-bg-map {
+    position: absolute;
+    top: calc(100%/21);
+    left: calc(100%/21);
+    bottom: 0;
+    right: 0;
+    margin: 0.28%;
+    opacity: .4;
+}
+
+.group-select-panel {
+    @apply flex flex-col my-12;
+}
+
+.group-select-panel > div:not(:last-of-type) {
+    @apply mb-8;
+}
+
+.group-select-panel > div:not(:last-of-type) div {
+    @apply mr-4;
+}
+
+.group-select-axis-panel {
+    @apply flex;
+    margin: 0 -.5rem;
+}
+
+.group-select-axis-panel > div {
+    @apply flex-1;
+}
+
+.group-select-axis-panel > div div {
+    @apply block mx-2;
+}
+
+.group-select-axis-panel > div div:not(:last-of-type) {
+    @apply mb-4;
+}
+
+.mini-settings-panel {
+    @apply flex justify-center items-center;
+}
+
+.mini-settings-panel > div {
+    @apply flex-1;
+}
+
+.mini-settings-panel > div > div:not(:last-of-type) {
+    @apply mb-4;
+}
+
+
+
+
+/* task */
+
+.task-display {
+    @apply font-display flex text-9xl mb-6;
+}
+
+.task-display > h1 {
+    @apply text-9xl;
+}
+
+.task-display > h1:not(:first-of-type,:last-of-type) {
+    line-height: .82;
+}
+
+
+
+.hint-panel {
+    @apply flex items-center flex-1 bg-blue rounded-lg p-4 text-white;
+}
+
+
+.hint-panel > i[class^="icon-"] {
+    @apply text-2xl mr-4;
+}

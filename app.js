@@ -8,6 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/user", require("./routes/user.routes"));
+app.use("/api/result", require("./routes/result.routes"));
 
 const PORT = config.get("port") || 5000;
 

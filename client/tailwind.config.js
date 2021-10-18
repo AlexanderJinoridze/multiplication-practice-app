@@ -2,14 +2,22 @@ module.exports = {
     purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
     darkMode: "class", // or "media" or "class"
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                "sans": ["Merriweather Sans"],
+                "display": ["Fredoka One"],
+            }
+        },
         container: {
             center: true,
+            padding: "1rem"
         },
         colors: {
             transparent: "transparent",
             current: "currentColor",
+            inherit: "inherit",
             white: "#fff",
+            black: "#000",
             gray: {
                 DEFAULT: "#707F8F",
                 "50":    "#F9FAFB",
@@ -83,5 +91,7 @@ module.exports = {
             textColor: ['dark']
         },
     },
-    plugins: [],
+    plugins: [
+
+    ]
 }

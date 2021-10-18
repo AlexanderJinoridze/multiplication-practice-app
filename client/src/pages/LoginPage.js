@@ -73,7 +73,7 @@ export default function LoginPage() {
     },[body]);
 
     return(
-        <div id="page">
+        <div className="page">
             <main>
                 <div className="w-96 mx-auto">
                     <h3 className="mb-10 text-center">Log in</h3>
@@ -114,7 +114,7 @@ export default function LoginPage() {
                                     name="submit"
                                     disabled={ loading }
                                     value="Log in"
-                                    className="btn btn-primary"
+                                    className="btn-small btn-theme-primary"
                                 />
                                 <div className="loader"></div>
                             </div>
