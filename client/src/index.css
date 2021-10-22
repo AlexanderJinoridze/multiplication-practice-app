@@ -230,7 +230,7 @@ input[type="checkbox"]:checked + .checkbox:after {
 }
 
 .page > main {
-    @apply flex-1 py-12;
+    @apply flex flex-col flex-1 py-12 w-full mx-auto;
 }
 
 
@@ -448,4 +448,72 @@ input[type="checkbox"]:checked + .checkbox:after {
 
 .hint-panel > i[class^="icon-"] {
     @apply text-2xl mr-4;
+}
+
+
+.statistics-chart {
+    display: flex;
+    height: 8rem;
+}
+
+.statistics-chart > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1;
+    align-items: stretch;
+    height: 100%;
+}
+
+
+
+.chart-column-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+}
+
+.chart-column-container > div {
+    width: 60%;
+}
+
+.chart-column-title {
+    @apply border-t-2 border-gray-100 dark:border-gray-800 py-2 text-center;
+}
+
+
+svg.w-heatmap {
+    @apply mx-auto;
+    max-width: none;
+}
+
+svg.w-heatmap text {
+    fill: #16191D;
+}
+
+.dark svg.w-heatmap text {
+    fill: #fff;
+}
+
+.heatmap-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.total-results-panel {
+    @apply mb-12;
+}
+
+.total-results-panel > div {
+    @apply flex;
+    margin: 0 -.5rem;
+}
+
+.total-result-card {
+    @apply flex-1 m-2 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl text-center;
+}
+
+.total-result-card h4 {
+    @apply mt-1;
 }

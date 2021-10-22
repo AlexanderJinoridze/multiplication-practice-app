@@ -18,17 +18,12 @@ export const useAuth = () => {
             token: jwtToken
         }), {
             expires: 1/24
-        })
-        // localStorage.setItem(storageName, JSON.stringify({
-        //     userId: id,
-        //     token: jwtToken
-        // }));
+        });
     }, []);
 
     const logout = useCallback(() => {
         setToken(null);
         setUserId(null);
-        //localStorage.removeItem(storageName);
         Cookies.remove(storageName);
     }, []);
 

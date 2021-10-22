@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import Cookies from "js-cookie";
 
 export default function useHttp() {
     const [loading, setLoading] = useState(false);
@@ -23,6 +24,10 @@ export default function useHttp() {
 
             return data;
         } catch (e) {
+            if(e.message === "No authorization"){
+                Cookies.remove("userData");
+            }
+
             setLoading(false);
             setError(e.message);
             throw e;
