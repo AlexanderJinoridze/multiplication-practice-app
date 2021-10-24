@@ -11,7 +11,7 @@ export default function StatisticsChart(props) {
     });
 
     return(
-        <div className="statistics-chart mb-4">
+        <div className="statistics-chart">
             {
                 percentageList.map((value, index)=>{
                     return(

@@ -20,7 +20,7 @@ export default function App() {
     return (
         <LightToggleContext.Provider value={{ isDark, setLightMod, setDarkMod }}>
             <AuthContext.Provider value={{ token, login, logout, userId, isAuthenticated }}>
-                <div>
+                <div className="page">
                     { routes }
                     <Toaster
                         position="bottom-right"

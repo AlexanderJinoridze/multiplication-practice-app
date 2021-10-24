@@ -11,9 +11,9 @@ export default function PracticePage() {
     const [multiplicator, setMultiplicator] = useState([]);
 
     return(
-        <div className="page">
+        <>
             <Navbar />
-            <main className="flex flex-col flex-1 items-center container">
+            <main className="items-center container">
                 <PracticeContext.Provider value={{
                     practiceState,
                     setPracticeState,
@@ -27,6 +27,6 @@ export default function PracticePage() {
                 </PracticeContext.Provider>
             </main>
             <Footer />
-        </div>
+        </>
     );
 }

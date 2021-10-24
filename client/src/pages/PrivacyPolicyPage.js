@@ -4,9 +4,9 @@ import Navbar from "../components/Navbar";
 
 export default function PrivacyPolicyPage() {
     return(
-        <div id="page">
+        <>
             <Navbar />
-            <main className="container max-w-5xl">
+            <main className="max-w-5xl">
                 <h2 className="page-title">Privacy Policy</h2>
                 <div className="text-block">
                     <p>Last updated: October 08, 2021</p>
@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
                     <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:
                         <ul>
                             <li>Cookies or Browser Cookies. A cookie is a small file placed on Your Device. You can instruct Your browser to refuse all Cookies or to indicate when a Cookie is being sent. However, if You do not accept Cookies, You may not be able to use some parts of our Service. Unless you have adjusted Your browser setting so that it will refuse Cookies, our Service may use Cookies.</li>
-                            <li>Flash Cookies. Certain features of our Service may use local stored objects (or Flash Cookies) to collect and store information about Your preferences or Your activity on our Service. Flash Cookies are not managed by the same browser settings as those used for Browser Cookies. For more information on how You can delete Flash Cookies, please read "Where can I change the settings for disabling, or deleting local shared objects?" available at https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_</li>
+                            <li>Flash Cookies. Certain features of our Service may use local stored objects (or Flash Cookies) to collect and store information about Your preferences or Your activity on our Service. Flash Cookies are not managed by the same browser settings as those used for Browser Cookies. For more information on how You can delete Flash Cookies, please read "Where can I change the settings for disabling, or deleting local shared objects?" available at <a target="_blank" href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_">Adobe Flash Player webpage</a></li>
                             <li>Web Beacons. Certain sections of our Service and our emails may contain small electronic files known as web beacons (also referred to as clear gifs, pixel tags, and single-pixel gifs) that permit the Company, for example, to count users who have visited those pages or opened an email and for other related website statistics (for example, recording the popularity of a certain section and verifying system and server integrity).</li>
                         </ul>
                     </p>
@@ -143,6 +143,6 @@ export default function PrivacyPolicyPage() {
                 </div>
             </main>
             <Footer />
-        </div>
+        </>
     );
 }

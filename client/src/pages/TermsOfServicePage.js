@@ -4,9 +4,9 @@ import Navbar from "../components/Navbar";
 
 export default function TermsOfServicePage() {
     return(
-        <div id="page">
+        <>
             <Navbar />
-            <main className="container max-w-5xl">
+            <main className="max-w-5xl">
                 <h2 className="page-title">Terms of Service</h2>
                 <div className="text-block">
                     <h4>1. Terms</h4>
@@ -37,6 +37,6 @@ export default function TermsOfServicePage() {
                 </div>
             </main>
             <Footer />
-        </div>
+        </>
     );
 }

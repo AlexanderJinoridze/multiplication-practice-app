@@ -29,7 +29,8 @@ export default function PracticeSettings() {
         if(direction === "y" || direction === "both") {
             setMultiplicator([]);
         }
-    };
+    }
+
     const groupSelection = (direction = "both", start = 0, end = 20) => {
         if(start >= end) {
             throw new Error("start value must be less than a value of the end");
@@ -63,9 +64,7 @@ export default function PracticeSettings() {
         }
     }
 
-    const resize = () => {
-        setSmallSettingsBoard(window.innerWidth <= 768);
-    }
+    const resize = () => { setSmallSettingsBoard(window.innerWidth <= 768) }
 
     useEffect(() => {
         window.addEventListener("resize", resize);
@@ -73,7 +72,7 @@ export default function PracticeSettings() {
         return () => {
             window.removeEventListener("resize", resize);
         }
-    }, [])
+    }, []);
 
     return(
         <div className="max-w-3xl w-full">
@@ -86,15 +85,15 @@ export default function PracticeSettings() {
                 <div className="group-select-axis-panel">
                     <div>
                         <div className="btn-small btn-theme-danger" onClick={ ()=>clearSelection("x") }>Clear by X</div>
-                        <div className="btn-small btn-theme-primary" onClick={ ()=>groupSelection("x", 0, 10) }>All 1 digits by X</div>
-                        <div className="btn-small btn-theme-primary" onClick={ ()=>groupSelection("x", 10) }>All 2 digits by X</div>
-                        <div className="btn-small btn-theme-primary" onClick={ ()=>groupSelection("x") }>Select all by X</div>
+                        <div className="btn-small btn-theme-link" onClick={ ()=>groupSelection("x", 0, 10) }>All 1 digits by X</div>
+                        <div className="btn-small btn-theme-link" onClick={ ()=>groupSelection("x", 10) }>All 2 digits by X</div>
+                        <div className="btn-small btn-theme-link" onClick={ ()=>groupSelection("x") }>Select all by X</div>
                     </div>
                     <div>
                         <div className="btn-small btn-theme-danger" onClick={ ()=>clearSelection("y") }>Clear by Y</div>
-                        <div className="btn-small btn-theme-primary" onClick={ ()=>groupSelection("y", 0, 10) }>All 1 digits by Y</div>
-                        <div className="btn-small btn-theme-primary" onClick={ ()=>groupSelection("y", 10) }>All 2 digits by Y</div>
-                        <div className="btn-small btn-theme-primary" onClick={ ()=>groupSelection("y") }>Select all by Y</div>
+                        <div className="btn-small btn-theme-link" onClick={ ()=>groupSelection("y", 0, 10) }>All 1 digits by Y</div>
+                        <div className="btn-small btn-theme-link" onClick={ ()=>groupSelection("y", 10) }>All 2 digits by Y</div>
+                        <div className="btn-small btn-theme-link" onClick={ ()=>groupSelection("y") }>Select all by Y</div>
                     </div>
                 </div>
             </div>

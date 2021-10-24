@@ -126,75 +126,72 @@ export default function StatisticsPage() {
                 5000: "#002855"
             });
         }
-    }, [isDark])
-
-    if(loading) {
-        return <Loader />
-    }
+    }, [isDark]);
 
     return(
         <>
-        {!loading
-        &&
-        <div className="page">
             <Navbar />
             <main className="flex flex-col max-w-4xl">
-                <h2 className="text-center mb-4">Statistics</h2>
-                <div className="total-results-panel">
-                    <div>
-                        <div className="total-result-card">
-                            <span>Total practices task solved</span>
-                            <h4>{ totalPractice }</h4>
+                {loading?
+                    <Loader />
+                :
+                    <>
+                        <h2 className="text-center mb-4">Statistics</h2>
+                        <div className="total-results-panel">
+                            <div>
+                                <div className="total-result-card">
+                                    <span>Total practices task solved</span>
+                                    <h4>{ totalPractice }</h4>
+                                </div>
+                                <div className="total-result-card">
+                                    <span>Total time spent</span>
+                                    <h4>{ totalTime }</h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="total-result-card">
+                                    <span>Total correct answers</span>
+                                    <h4>{ totalCorrect }</h4>
+                                </div>
+                                <div className="total-result-card">
+                                    <span>Total wrong answers</span>
+                                    <h4>{ totalWrong }</h4>
+                                </div>
+                                <div className="total-result-card">
+                                    <span>Percentage of right answers</span>
+                                    <h4>{ totalCorrect / totalPractice * 100 }%</h4>
+                                </div>
+                            </div>
                         </div>
-                        <div className="total-result-card">
-                            <span>Total time spent</span>
-                            <h4>{ totalTime }</h4>
+                        <div className="text-center max-w-lg mx-auto mb-4">
+                            <h5>Result Histograms</h5>
+                            <span className="text-pale">This histograms shows relative correct-wrong frequencies and also relative time that tooks to solve for each number</span>
                         </div>
-                    </div>
-                    <div>
-                        <div className="total-result-card">
-                            <span>Total correct answers</span>
-                            <h4>{ totalCorrect }</h4>
+                        <span className="mb-2 text-pale italic">Correct answer histogram</span>
+                        <StatisticsChart data={ correctData } color="#00AF00" />
+                        <span className="mb-2 text-pale italic">Wrong answer histogram</span>
+                        <StatisticsChart data={ wrongData } color="#F01E1E" />
+                        <span className="mb-2 text-pale italic">Correct-Wrong answer ratio histogram</span>
+                        <StatisticsChart data={ ratioData } color="#B140B4" />
+                        <span className="mb-2 text-pale italic">Time histogram</span>
+                        <StatisticsChart data={ timeData } color="#2289FF" />
+                        <div className="text-center max-w-lg mx-auto mb-4 mt-12">
+                            <h5>Practice Calendar</h5>
+                            <span className="text-pale">This calendar shows the dates of active learning</span>
                         </div>
-                        <div className="total-result-card">
-                            <span>Total wrong answers</span>
-                            <h4>{ totalWrong }</h4>
+                        <div className="heatmap-container">
+                            <HeatMap
+                                width={ 740 }
+                                value={ heatMapData }
+                                startDate={ new Date(`${ new Date().getFullYear() }/01/01`) }
+                                weekLabels={[ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ]}
+                                panelColors={ heatMapColorScheme }
+                            />
                         </div>
-                        <div className="total-result-card">
-                            <span>Percentage of right answers</span>
-                            <h4>{ totalCorrect / totalPractice * 100 }%</h4>
-                        </div>
-                    </div>
-                </div>
-                <div className="text-center max-w-lg mx-auto mb-4">
-                    <h5>Result Histograms</h5>
-                    <span className="text-pale">This histograms shows relative correct-wrong frequencies and also relative time that tooks to solve for each number</span>
-                </div>
-                <span className="mb-2 text-pale italic">Correct answer histogram</span>
-                <StatisticsChart data={ correctData } color="#00AF00" />
-                <span className="mb-2 text-pale italic">Wrong answer histogram</span>
-                <StatisticsChart data={ wrongData } color="#F01E1E" />
-                <span className="mb-2 text-pale italic">Correct-Wrong answer ratio histogram</span>
-                <StatisticsChart data={ ratioData } color="#B140B4" />
-                <span className="mb-2 text-pale italic">Time histogram</span>
-                <StatisticsChart data={ timeData } color="#2289FF" />
-                <div className="text-center max-w-lg mx-auto mb-4 mt-12">
-                    <h5>Practice Calendar</h5>
-                    <span className="text-pale">This calendar shows the dates of active learning</span>
-                </div>
-                <div className="heatmap-container">
-                    <HeatMap
-                        width={740}
-                        value={heatMapData}
-                        startDate={ new Date(`${ new Date().getFullYear() }/01/01`) }
-                        weekLabels={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
-                        panelColors={ heatMapColorScheme }
-                    />
-                </div>
+                    </>
+                }
             </main>
             <Footer />
-        </div>
-        }
         </>
     );
 }
