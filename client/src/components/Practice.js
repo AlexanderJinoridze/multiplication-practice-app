@@ -7,6 +7,22 @@ import { AuthContext } from "../context/AuthContext";
 import Loader from "./Loader";
 
 export default function Practice() {
+    const hints = [
+        {patterns: [/^1$/,/^\d*$/], message: "Everything multiplied by 1 is that number."},
+        {patterns: [/^10$/,/^20$|^1[0-9]$|^[2-9]$/], message: "Just take whatever number multiplied by 10 and then merge 0 to it."},
+        {patterns: [/^11$/,/^[2-9]$/], message: "Just duplicate two times the number which is multiplied by 11."},
+        {patterns: [/^9$/,/^20$|^1[2-9]$/], message: "When multiplying 2 digit numbers by 9 you have to subtract 2 from that number and merge to it a number that is needed to get 18."},
+        {patterns: [/^11$/,/^20$|^1[0-9]$/], message: "When multiplying 11 by 2 digit number you just write that number and put sum of each individual digit in the center."},
+        {patterns: [/^5$/,/^20$|^1[2-9]$|^[3-9]$/], message: "Divide whatever number you are multiplying by 5 in half and erase the floating-point."},
+        {patterns: [/^9$/,/^[2-4]$|^[6-9]$/], message: "When multiplying 1 digit number by 9 you have to subtract 1 from that number and merge to it number that is needed to get 9."},
+        {patterns: [/^2$/,/^[2-8]$|^1[2-9]$/], message: "Simply add whatever number is multplied by 2 to itself."},
+        {patterns: [/^3$/,/^[3-4]$|^[6-8]$/], message: "Multiplication by 3 has to be learned by heart through constant practice, sorry."},
+        {patterns: [/^4$/,/^4$|^[6-8]$/], message: "Multiplication by 4 has to be learned by heart through constant practice, sorry."},
+        {patterns: [/^[7-8]$/,/^[7-8]$/], message: "When multiplying 7 by 8 or 8 by 7 just remember this delightful equation 56=7x8."},
+        {patterns: [/^[6-8]$/,/^[6-8]$/], message: "Multiplying numbers from 6 to 8 to each other is tough and have to be learned by heart through practicing."},
+        {patterns: [/^20$/,/^[2-4]$|^[6-8]$|^1[2-9]$|^20$/], message: "Just multiply whatever number multiplied by 20 to 2 and then merge 0 to it."},
+        {patterns: [/^[3-4]$|^[6-8]$|^1[2-9]$/,/^1[2-9]$/], message: "No hint for this problem, sorry, you have to learn it by heart through practicing, BTW that's why this website exists"}
+    ];
 
     const [answer, setAnswer] = useState("");
     const [task, setTask] = useState([1,1]);
@@ -17,56 +33,6 @@ export default function Practice() {
     const [showAnswer, setShowAnswer] = useState(false);
     const [showHint, setShowHint] = useState("");
     const [currentHint, setCurrentHint] = useState("");
-
-    const [hints, setHints] = useState([
-        {patterns: [/^1$/,/^\d*$/], message: "Hint for 1"},
-        {patterns: [/^10$/,/^20$|^1[0-9]$|^[2-9]$/], message: "Hint for 10"},
-        {patterns: [/^11$/,/^[2-9]$/], message: "Hint for 11 which is multiplied on 1 digit numbers"},
-        {patterns: [/^9$/,/^20$|^1[2-9]$/], message: "Hint for 9 which is multiplied on number from 12 to 20"},
-        {patterns: [/^11$/,/^20$|^1[0-9]$/], message: "Hint for 11 which is multiplied on 2 digit numbers"},
-        {patterns: [/^5$/,/^20$|^1[2-9]$|^[3-9]$/], message: "Hint for 5"},
-        {patterns: [/^9$/,/^[2-4]$|^[6-9]$/], message: "Hint for 9 which is multiplied on 1 digit numbers"},
-        {patterns: [/^2$/,/^[2-8]$|^1[2-9]$/], message: "Hint for 2"},
-        {patterns: [/^3$/,/^[3-4]$|^[6-8]$/], message: "Hint for 3"},
-        {patterns: [/^4$/,/^4$|^[6-8]$/], message: "Hint for 4"},
-        {patterns: [/^[7-8]$/,/^[7-8]$/], message: "Hint for numbers from 7 to 8 from each side"},
-        {patterns: [/^[6-8]$/,/^[6-8]$/], message: "Hint for numbers from 6 to 8 from each side"},
-        {patterns: [/^20$/,/^[2-4]$|^[6-8]$|^1[2-9]$|^20$/], message: "Hint for 20"},
-        {patterns: [/^[3-4]$|^[6-8]$/,/^1[2-9]$/], message: "Hint for all the rest 1 digit numbers multiplied on 2 digit numbers"},
-        {patterns: [/^1[2-9]$/,/^1[2-9]$/], message: "Hint for all the rest 2 digit numbers multiplied on 2 digit numbers"},
-    ]);
-
-    const findUsefulHint = useCallback(() => {
-        let isValueFounded = false;
-
-        hints.map((hint) => {
-            if(!isValueFounded) {
-                let patterns = [...hint.patterns];
-                let tasksArray = [...task];
-                let isFirstMatched = false;
-
-                hint.patterns.map((testedPattern, testPatternIndex) => {
-                    task.map((testedTask, testedTaskIndex) => {
-                        if(!isFirstMatched){
-                            if(testedPattern.test(testedTask)) {
-                                patterns.splice(testPatternIndex,1);
-                                tasksArray.splice(testedTaskIndex,1);
-                                isFirstMatched = true;
-                            }
-                        }
-                    });
-                });
-
-                if(isFirstMatched){
-                    if(patterns[0].test(tasksArray[0])){
-                        console.log(hint.message);
-                        isValueFounded = true;
-                        setCurrentHint(hint.message);
-                    }
-                }
-            }
-        })
-    }, [task, hints]);
 
     const timer = useTimer();
     const { request } = useHttp();
@@ -122,7 +88,6 @@ export default function Practice() {
         }, [task, token, timerID, request]
     );
 
-
     const handleAnswer = useCallback(() => {
         try{
             if(answer === "") {
@@ -151,7 +116,37 @@ export default function Practice() {
     
             setAnswer("");
         } catch(e) {}
-    },[isCorrect, answer])
+    },[isCorrect, answer]);
+
+    const findUsefulHint = useCallback(() => {
+        let isValueFounded = false;
+
+        hints.map((hint) => {
+            if(!isValueFounded) {
+                let patterns = [...hint.patterns];
+                let tasksArray = [...task];
+                let isFirstMatched = false;
+
+                hint.patterns.map((testedPattern, testPatternIndex) => {
+                    task.map((testedTask, testedTaskIndex) => {
+                        if(!isFirstMatched && testedPattern.test(testedTask)) {
+                            patterns.splice(testPatternIndex,1);
+                            tasksArray.splice(testedTaskIndex,1);
+                            isFirstMatched = true;
+                        }
+                    });
+                });
+
+                if(isFirstMatched){
+                    if(patterns[0].test(tasksArray[0])){
+                        console.log(hint.message);
+                        isValueFounded = true;
+                        setCurrentHint(hint.message);
+                    }
+                }
+            }
+        })
+    }, [task, hints]);
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {

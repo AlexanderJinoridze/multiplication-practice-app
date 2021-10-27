@@ -20,6 +20,8 @@
             flex
             justify-between
             items-center
+            flex-col
+            sm:flex-row
             p-6;
     }
 

@@ -11,8 +11,7 @@
 
 
 .logo {
-    @apply block hover:no-underline;
-    color: inherit !important;
+    @apply block;
 }
 
 .text-pale {
@@ -83,10 +82,10 @@
         text-2xl
         absolute
         leading-6
+        top-px
+        right-px
         py-3
         px-4;
-    top: 1px;
-    right: 1px;
 }
 
 .btn-input + input:not([type="submit"],[type="reset"],[type="checkbox"],[type="radio"]) {
@@ -149,8 +148,7 @@
 /* checkbox */
 
 .checkbox, .chart-checkbox {
-    position: relative;
-    cursor: pointer;
+    @apply relative cursor-pointer;
 }
 
 .checkbox:before {
@@ -170,7 +168,7 @@
 }
 
 .mini-panel-checkbox:not(:last-of-type) {
-    margin-bottom: 1rem;
+    @apply mb-4;
 }
 
 .chart-checkbox {
@@ -179,18 +177,16 @@
         rounded-sm
         items-center
         justify-center
+        w-full
+        h-full
         bg-gray-100
         dark:bg-gray-800
         hover:bg-gray-200
         dark:hover:bg-gray-700;
-    width: 100%;
-    height: 100%;
 }
 
 .chart-checkbox.mini-chart-checkbox {
-    @apply mx-auto;
-    width: 3rem;
-    height: 3rem;
+    @apply mx-auto w-12 h-12;
 }
 
 input[type="checkbox"]:checked + .checkbox:before,
@@ -205,18 +201,18 @@ input[type="checkbox"]:checked + .chart-checkbox {
 }
 
 input[type="checkbox"]:checked + .checkbox:after {
+    content: "\f101";
     @apply
         block
         absolute
+        top-0
+        w-full
+        h-full
+        text-center
         text-white
         dark:text-gray-900;
-    content: "\f101";
-    font-size: 14px;
     font-family: icons;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+    font-size: 14px;
     line-height: 18px;
 }
 
@@ -230,7 +226,7 @@ input[type="checkbox"]:checked + .checkbox:after {
 }
 
 .page > main {
-    @apply flex flex-col flex-1 py-12 w-full mx-auto;
+    @apply flex flex-col flex-1 py-12 px-2 w-full mx-auto;
 }
 
 
@@ -239,7 +235,7 @@ input[type="checkbox"]:checked + .checkbox:after {
 /* loading */
 
 .loading {
-    position: relative;
+    @apply relative;
 }
 
 .loading * {
@@ -284,7 +280,7 @@ input[type="checkbox"]:checked + .checkbox:after {
 }
 
 .loading .loader, .page-loader {
-    display: block;
+    @apply block;
 }
 
 @keyframes spinner {
@@ -302,11 +298,11 @@ input[type="checkbox"]:checked + .checkbox:after {
 }
 
 .text-block h1, .text-block h2, .text-block h3, .text-block h4, .text-block h5, .text-block h6 {
-    @apply mb-3;
+    @apply mb-2;
 }
 
 .text-block p {
-    @apply mb-6 mt-3 text-gray-700 dark:text-gray-300;
+    @apply mb-2 mt-2 text-gray-800 dark:text-gray-100;
 }
 
 .text-block ul, .text-block ol {
@@ -323,39 +319,28 @@ input[type="checkbox"]:checked + .checkbox:after {
 /* chart */
 
 .chart {
+    @apply mx-auto;
     width: 720px;
-    margin: 0 auto;
 }
 
 .chart-outer-container {
-    position: relative;
-    width: 100%;
+    @apply relative w-full;
     padding-bottom: 100%;
 }
 
 .chart-inner-container {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    @apply absolute z-10 w-full h-full top-0 left-0;
 }
 
 .chart-inner-container > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @apply flex justify-center items-center p-px;
     width: calc(100%/21);
     height: calc(100%/21);
-    padding: 1px;
 }
 
 .multiplication-table-cell > div {
-    @apply rounded-sm flex items-center justify-center;
+    @apply rounded-sm flex items-center justify-center w-full h-full;
     color: rgba(22,25,29,.25);
-    width: 100%;
-    height: 100%;
 }
 
 .dark .multiplication-table-cell > div {
@@ -383,13 +368,10 @@ input[type="checkbox"]:checked + .checkbox:after {
 }
 
 .chart-bg-map {
-    position: absolute;
+    @apply absolute bottom-0 right-0 opacity-40;
     top: calc(100%/21);
     left: calc(100%/21);
-    bottom: 0;
-    right: 0;
     margin: 0.28%;
-    opacity: .4;
 }
 
 .group-select-panel {
@@ -404,9 +386,13 @@ input[type="checkbox"]:checked + .checkbox:after {
     @apply mr-4;
 }
 
-.group-select-axis-panel {
+.group-select-axis-panel, .total-results-panel > div {
     @apply flex;
     margin: 0 -.5rem;
+}
+
+.total-results-panel > div {
+    @apply flex-col sm:flex-row;
 }
 
 .group-select-axis-panel > div {
@@ -439,11 +425,11 @@ input[type="checkbox"]:checked + .checkbox:after {
 /* task */
 
 .task-display {
-    @apply font-display flex text-9xl mb-6;
+    @apply font-display flex mb-6;
 }
 
 .task-display > h1 {
-    @apply text-9xl;
+    @apply text-6xl sm:text-9xl;
 }
 
 .task-display > h1:not(:first-of-type,:last-of-type) {
@@ -463,30 +449,22 @@ input[type="checkbox"]:checked + .checkbox:after {
 
 
 .statistics-chart {
-    display: flex;
-    height: 8rem;
+    @apply flex h-32;
 }
 
 .statistics-chart > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    flex: 1;
-    align-items: stretch;
-    height: 100%;
+    @apply flex flex-col justify-end items-stretch h-full;
+    width: 5%;
 }
 
 
 
 .chart-column-container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    height: 100%;
+    @apply flex items-end justify-center h-full;
 }
 
 .chart-column-container > div {
-    width: 60%;
+    @apply w-3/5;
 }
 
 .chart-column-title {
@@ -495,8 +473,7 @@ input[type="checkbox"]:checked + .checkbox:after {
 
 
 svg.w-heatmap {
-    @apply mx-auto;
-    max-width: none;
+    @apply mx-auto max-w-none;
 }
 
 svg.w-heatmap text {
@@ -508,17 +485,11 @@ svg.w-heatmap text {
 }
 
 .heatmap-container {
-    width: 100%;
-    overflow-x: auto;
+    @apply w-full overflow-x-auto;
 }
 
 .total-results-panel {
     @apply mb-12;
-}
-
-.total-results-panel > div {
-    @apply flex;
-    margin: 0 -.5rem;
 }
 
 .total-result-card {
@@ -548,4 +519,22 @@ svg.w-heatmap text {
 
 .dark .logo path:last-of-type {
     fill: #FFBF00;
+}
+
+
+
+.tips-list-container {
+    @apply flex flex-col;
+}
+
+.tips-list-container > div:not(:last-of-type) {
+    @apply mb-12;
+}
+
+.tips-list-container > div > h4 {
+    @apply font-display text-blue-500 dark:text-yellow-500 mb-4;
+}
+
+.tips-list-container > div > .text-block {
+    @apply px-8;
 }

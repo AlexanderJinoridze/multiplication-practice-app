@@ -47,10 +47,10 @@ export default function DashboardPage() {
                     <>
                         <h2 className="mb-2">Welcome <b>{ userData.username }</b></h2>
                         <h5>Your email is <i>{ userData.email }</i></h5>
-                        <div className="flex mt-8 justify-center">
-                            <Link className="btn-small btn-theme-primary mx-2" to="/practice">Practice</Link>
-                            <Link className="btn-small btn-theme-primary mx-2" to="/tips">Tips & Tricks</Link>
-                            <Link className="btn-small btn-theme-primary mx-2" to="/statistics">Statistics</Link>
+                        <div className="flex mt-8 justify-center flex-col sm:flex-row">
+                            <Link className="btn-small btn-theme-primary mb-4 sm:mb-0 sm:mx-2" to="/practice">Practice</Link>
+                            <Link className="btn-small btn-theme-primary mb-4 sm:mb-0 sm:mx-2" to="/tips">Tips & Tricks</Link>
+                            <Link className="btn-small btn-theme-primary sm:mx-2" to="/statistics">Statistics</Link>
                         </div>
                         <div className="flex flex-col items-center mt-32">
                             <span>Want to permanemtly delete your account and progress?</span>

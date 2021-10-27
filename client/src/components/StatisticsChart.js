@@ -2,6 +2,7 @@ import React from "react";
 
 export default function StatisticsChart(props) {
 
+    const title = props.title;
     let data = [...props.data];
     let maxValue = Math.max(...data);
     let percentageList = [];
@@ -11,7 +12,10 @@ export default function StatisticsChart(props) {
     });
 
     return(
-        <div className="statistics-chart">
+        <>
+            { title && <span className="mb-2 text-pale italic">{ title }</span> }
+
+            <div className="statistics-chart">
             {
                 percentageList.map((value, index)=>{
                     return(
@@ -27,5 +31,6 @@ export default function StatisticsChart(props) {
                 })
             }
         </div>
+        </>
     );
 }
