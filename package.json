@@ -8,6 +8,7 @@
         "server": "nodemon app.js",
         "build": "cd client && npm run build",
         "install-client": "cd client && npm install",
+        "heroku-prebuild": "npm i -f",
         "heroku-postbuild": "npm run install-client && npm run build",
         "client": "npm run start --prefix client",
         "client:install": "npm install --prefix client",
