@@ -7,7 +7,7 @@
         "start": "cross-env NODE_ENV=production node app.js",
         "server": "nodemon app.js",
         "build": "cd client && npm run build",
-        "install-client": "cd client && npm install --no-optional",
+        "install-client": "cd client && npm ci --no-optional",
         "heroku-prebuild": "npm i -f",
         "heroku-postbuild": "npm run install-client && npm run build",
         "client": "npm run start --prefix client",
@@ -40,5 +40,8 @@
         "nodemon": "^2.0.12",
         "postcss": "^7.0.38",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16"
+    },
+    "engines": {
+      "npm": "8.x"
     }
 }
