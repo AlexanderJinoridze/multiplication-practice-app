@@ -7,6 +7,11 @@ url("../fonts/_Icons/icons.woff2?2b76447d444bf1fc13e8b9d93c63c910") format("woff
 url("../fonts/_Icons/icons.woff?2b76447d444bf1fc13e8b9d93c63c910") format("woff");
 }
 
+i[class^="icon-"], i[class*=" icon-"] {
+    @apply block;
+    line-height: 0 !important;
+}
+
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
     font-family: icons !important;
     font-style: normal;
