@@ -8,13 +8,14 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function LoginPage() {
 
+    const [sending, setSending] = useState(false);
     const validationTests = {
-        email: (value)=>/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value.trim()),
-        password: (value)=>!!value.trim()
+        email: (value) => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value.trim()),
+        password: (value) => !!value.trim()
     };
 
     const auth = useContext(AuthContext);
-    const { loading, request } = useHttp();
+    const { request } = useHttp();
 
     const [startValidation, setStartValidation] = useState(false);
     const [body, setBody] = useState({
@@ -28,13 +29,15 @@ export default function LoginPage() {
 
     const loginHandler = async (event) => {
         event.preventDefault();
-        try{
+        setSending(true);
+        try {
             const data = await request("/api/auth/login", "POST", { ...body });
+            setSending(false);
             auth.login(data.token, data.userId);
         } catch (e) {
-            if(e.errors) {
+            if (e.errors) {
                 setStartValidation(true);
-                setErrors((prev)=>{
+                setErrors((prev) => {
                     let newErrorState = { ...prev };
                     e.errors.forEach(element => {
                         const currentField = newErrorState[element.param];
@@ -46,6 +49,7 @@ export default function LoginPage() {
             } else {
                 setStartValidation(false);
             }
+            setSending(false);
             toast.error(e.message);
         }
 
@@ -56,28 +60,28 @@ export default function LoginPage() {
     }
 
     const handleChange = (e) => {
-        setBody((prev)=>{
+        setBody((prev) => {
             return { ...prev, [e.target.name]: e.target.value }
         });
     }
 
-    useEffect(()=>{
-        if(startValidation) {
+    useEffect(() => {
+        if (startValidation) {
             Object.keys(errors).forEach(key => {
-                if(startValidation) {
-                    setErrors((prev)=>{
+                if (startValidation) {
+                    setErrors((prev) => {
                         return { ...prev, [key]: { ...prev[key], isInvalid: !validationTests[key](body[key]) } }
                     });
                 }
             });
         }
-    },[body]);
+    }, [body]);
 
-    return(
+    return (
         <main className="max-w-sm">
             <Logo classes="mx-auto mb-12" />
             <h3 className="mb-6 text-center">Log in</h3>
-            <form action="" onSubmit={ loginHandler }>
+            <form action="" onSubmit={loginHandler}>
                 <div className="mb-4">
                     <label htmlFor="email">
                         <span>E-mail</span>
@@ -86,11 +90,11 @@ export default function LoginPage() {
                             name="email"
                             id="email"
                             maxLength="320"
-                            value={ body.email }
-                            className={ errors.email.isInvalid? "error" : "" }
-                            onChange={ handleChange }
+                            value={body.email}
+                            className={errors.email.isInvalid ? "error" : ""}
+                            onChange={handleChange}
                         />
-                        { errors.email.isInvalid && <span className="error-message">{ errors.email.msg }</span> }
+                        {errors.email.isInvalid && <span className="error-message">{errors.email.msg}</span>}
                     </label>
                 </div>
                 <div className="mb-4">
@@ -100,19 +104,19 @@ export default function LoginPage() {
                             name="password"
                             id="password"
                             maxLength="128"
-                            value={ body.password }
-                            className={ errors.password.isInvalid? "error" : "" }
-                            onChange={ handleChange }
+                            value={body.password}
+                            className={errors.password.isInvalid ? "error" : ""}
+                            onChange={handleChange}
                         />
-                        { errors.password.isInvalid && <span className="error-message">{ errors.password.msg }</span> }
+                        {errors.password.isInvalid && <span className="error-message">{errors.password.msg}</span>}
                     </label>
                 </div>
                 <div className="flex items-center mt-10">
-                    <div className={`submit-container mr-4 ${ loading? "loading" : ""}`}>
+                    <div className={`submit-container mr-4 ${sending ? "loading" : ""}`}>
                         <input
                             type="submit"
                             name="submit"
-                            disabled={ loading }
+                            disabled={sending}
                             value="Log in"
                             className="btn-small btn-theme-primary"
                         />

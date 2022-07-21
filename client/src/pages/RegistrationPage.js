@@ -6,15 +6,17 @@ import Logo from "../components/Logo";
 import useHttp from "../hooks/http.hook";
 
 export default function RegistrationPage() {
+
+    const [sending, setSending] = useState(false);
     const validationTests = {
-        username: (value)=>!!value.trim(),
-        email: (value)=>/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value.trim()),
-        password: (value)=>/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(value.trim()),
-        confirmPassword: (value)=>value.trim()===body.password.trim(),
-        terms: (value)=>!!value
+        username: (value) => !!value.trim(),
+        email: (value) => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value.trim()),
+        password: (value) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(value.trim()),
+        confirmPassword: (value) => value.trim() === body.password.trim(),
+        terms: (value) => !!value
     };
 
-    const { loading, request } = useHttp();
+    const { request } = useHttp();
     const history = useHistory();
 
     const [startValidation, setStartValidation] = useState(false);
@@ -35,9 +37,11 @@ export default function RegistrationPage() {
     });
 
     const registerHandler = async (event) => {
+        setSending(true);
         event.preventDefault();
-        try{
+        try {
             const data = await request("/api/auth/register", "POST", { ...body });
+            setSending(false);
             setBody({
                 username: "",
                 email: "",
@@ -48,10 +52,10 @@ export default function RegistrationPage() {
             toast.success(data.message);
             history.push("/");
         } catch (e) {
-            if(e.errors) {
+            if (e.errors) {
                 setStartValidation(true);
                 setShowPasswordGuide(false);
-                setErrors((prev)=>{
+                setErrors((prev) => {
                     let newErrorState = { ...prev };
                     e.errors.forEach(element => {
                         const currentField = newErrorState[element.param];
@@ -64,21 +68,22 @@ export default function RegistrationPage() {
                 setStartValidation(false);
                 setShowPasswordGuide(true);
             }
+            setSending(false);
             toast.error(e.message);
         }
     }
 
     const handleChange = (e) => {
-        setBody((prev)=>{
+        setBody((prev) => {
             return { ...prev, [e.target.name]: e.target.value }
         });
     }
 
-    useEffect(()=>{
-        if(startValidation) {
+    useEffect(() => {
+        if (startValidation) {
             Object.keys(errors).forEach(key => {
-                if(startValidation) {
-                    setErrors((prev)=>{
+                if (startValidation) {
+                    setErrors((prev) => {
                         return { ...prev, [key]: { ...prev[key], isInvalid: !validationTests[key](body[key]) } }
                     });
                 }
@@ -86,13 +91,13 @@ export default function RegistrationPage() {
         } else {
             setShowPasswordGuide(!!body.password.length);
         }
-    },[body]);
+    }, [body]);
 
-    return(
+    return (
         <main className="max-w-sm">
             <Logo classes="mx-auto mb-12" />
             <h3 className="mb-6 text-center">Create your account</h3>
-            <form action="" onSubmit={ registerHandler }>
+            <form action="" onSubmit={registerHandler}>
                 <div className="mb-4">
                     <label htmlFor="username">
                         <span>Username</span>
@@ -101,11 +106,11 @@ export default function RegistrationPage() {
                             name="username"
                             id="username"
                             maxLength="256"
-                            value={ body.username }
-                            className={ errors.username.isInvalid? "error" : "" }
-                            onChange={ handleChange }
+                            value={body.username}
+                            className={errors.username.isInvalid ? "error" : ""}
+                            onChange={handleChange}
                         />
-                        { errors.username.isInvalid && <span className="error-message">{ errors.username.msg }</span> }
+                        {errors.username.isInvalid && <span className="error-message">{errors.username.msg}</span>}
                     </label>
                 </div>
                 <div className="mb-4">
@@ -116,11 +121,11 @@ export default function RegistrationPage() {
                             name="email"
                             id="email"
                             maxLength="320"
-                            value={ body.email }
-                            className={ errors.email.isInvalid? "error" : "" }
-                            onChange={ handleChange }
+                            value={body.email}
+                            className={errors.email.isInvalid ? "error" : ""}
+                            onChange={handleChange}
                         />
-                        { errors.email.isInvalid && <span className="error-message">{ errors.email.msg }</span> }
+                        {errors.email.isInvalid && <span className="error-message">{errors.email.msg}</span>}
                     </label>
                 </div>
                 <div className="mb-4">
@@ -130,9 +135,9 @@ export default function RegistrationPage() {
                             name="password"
                             id="password"
                             maxLength="128"
-                            value={ body.password }
-                            className={ errors.password.isInvalid? "error" : "" }
-                            onChange={ handleChange }
+                            value={body.password}
+                            className={errors.password.isInvalid ? "error" : ""}
+                            onChange={handleChange}
                         />
                         {(showPasswordGuide || errors.password.isInvalid) && <div className={(showPasswordGuide && "password-hint-message") || (errors.password.isInvalid && "error-message")}>
                             <span>Password should have:</span>
@@ -151,11 +156,11 @@ export default function RegistrationPage() {
                             name="confirmPassword"
                             id="confirmPassword"
                             maxLength="128"
-                            value={ body.confirmPassword }
-                            className={ errors.confirmPassword.isInvalid? "error":"" }
-                            onChange={ handleChange }
+                            value={body.confirmPassword}
+                            className={errors.confirmPassword.isInvalid ? "error" : ""}
+                            onChange={handleChange}
                         />
-                        { errors.confirmPassword.isInvalid && <span className="error-message">{ errors.confirmPassword.msg }</span> }
+                        {errors.confirmPassword.isInvalid && <span className="error-message">{errors.confirmPassword.msg}</span>}
                     </label>
                 </div>
                 <div className="mb-6">
@@ -164,22 +169,22 @@ export default function RegistrationPage() {
                             type="checkbox"
                             name="terms"
                             id="terms"
-                            defaultChecked={ body.terms }
-                            onChange={ (e)=>setBody((prev)=>{
+                            defaultChecked={body.terms}
+                            onChange={(e) => setBody((prev) => {
                                 return { ...prev, terms: !body.terms }
-                            }) }
+                            })}
                         />
                         <label htmlFor="terms" className="checkbox mr-3"></label>
                         <span>I accept the <Link to="/privacy-policy" target="_blank">Privacy Policy</Link> and <br /> the <Link to="/terms-of-service" target="_blank">Terms of Service</Link></span>
                     </div>
-                    { errors.terms.isInvalid && <span className="error-message">{ errors.terms.msg }</span> }
+                    {errors.terms.isInvalid && <span className="error-message">{errors.terms.msg}</span>}
                 </div>
                 <div className="flex items-center mt-10">
-                    <div className={`submit-container mr-4 ${ loading? "loading" : ""}`}>
+                    <div className={`submit-container mr-4 ${sending ? "loading" : ""}`}>
                         <input
                             type="submit"
                             name="submit"
-                            disabled={ loading }
+                            disabled={sending}
                             value="Sign up"
                             className="btn-small btn-theme-primary"
                         />

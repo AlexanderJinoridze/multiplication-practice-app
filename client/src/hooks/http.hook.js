@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import Cookies from "js-cookie";
 
 export default function useHttp() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const request = useCallback(async (url, method = "GET", body = null, headers = {}) => {
