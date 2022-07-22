@@ -7,7 +7,7 @@
         "start": "node app.js",
         "server": "nodemon app.js",
         "build": "cd client && npm run build",
-        "install-client": "cd client && npm i",
+        "install-client": "cd client && npm ci --no-optional",
         "heroku-prebuild": "npm i -f",
         "heroku-postbuild": "npm run install-client && npm run build",
         "client": "npm run start --prefix client",
@@ -42,6 +42,6 @@
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16"
     },
     "engines": {
-        "npm": "8.x"
+        "npm": "8.5.5"
     }
 }
